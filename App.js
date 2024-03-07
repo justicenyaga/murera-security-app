@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
+import "core-js/stable/atob";
 
 import authStorage from "./app/auth/storage";
 import navigationTheme from "./app/navigation/navigationTheme";
