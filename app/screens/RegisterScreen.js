@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
+import _ from "lodash";
 
+import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";
-import { Form, FormField, SubmitButton } from "../components/forms";
+import {
+  ErrorMessage,
+  Form,
+  FormField,
+  SubmitButton,
+} from "../components/forms";
+
+import authApi from "../api/auth";
+import usersApi from "../api/users";
+import useApi from "../hooks/useApi";
+import useAuth from "../auth/useAuth";
 
 YupPassword(Yup);
 
@@ -29,72 +41,103 @@ const validationSchema = Yup.object().shape({
 });
 
 const RegisterScreen = () => {
-  const handleSubmit = (values) => {
-    console.log(values);
+  const auth = useAuth();
+  const registerApi = useApi(usersApi.register);
+  const loginApi = useApi(authApi.login);
+
+  const [error, setError] = useState();
+
+  const handleSubmit = async (userInfo) => {
+    const data = _.pick(userInfo, [
+      "firstName",
+      "lastName",
+      "email",
+      "password",
+    ]);
+    const result = await registerApi.request(data);
+    if (!result.ok) {
+      if (result.data) setError(result.data);
+      else {
+        setError("An unexpected error occurred");
+        console.log(result);
+      }
+
+      return;
+    }
+
+    const { data: authToken } = await loginApi.request(
+      userInfo.email,
+      userInfo.password,
+    );
+    auth.logIn(authToken);
   };
 
   return (
-    <Screen style={styles.container} disablePaddingTop>
-      <Image style={styles.logo} source={require("../assets/logo.png")} />
+    <>
+      <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
+      <Screen style={styles.container} disablePaddingTop>
+        <Image style={styles.logo} source={require("../assets/logo.png")} />
 
-      <Form
-        initialValues={{
-          firstName: "",
-          lastName: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-        }}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
-        <View style={styles.name}>
+        <Form
+          initialValues={{
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+        >
+          <ErrorMessage error={error} visible={error} />
+          <View style={styles.name}>
+            <FormField
+              autoCorrect={false}
+              icon="account"
+              name="firstName"
+              placeholder="First Name"
+              width="49%"
+            />
+            <FormField
+              autoCorrect={false}
+              icon="account"
+              name="lastName"
+              placeholder="Last Name"
+              width="49%"
+            />
+          </View>
           <FormField
+            autoCapitalize="none"
             autoCorrect={false}
-            icon="account"
-            name="firstName"
-            placeholder="First Name"
-            width="49%"
+            icon="email"
+            keyboardType="email-address"
+            name="email"
+            placeholder="Email"
+            textContentType="emailAddress"
           />
           <FormField
+            autoCapitalize="none"
             autoCorrect={false}
-            icon="account"
-            name="lastName"
-            placeholder="Last Name"
-            width="49%"
+            icon="lock"
+            name="password"
+            placeholder="Password"
+            secureTextEntry
+            textContentType="password"
           />
-        </View>
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          name="email"
-          placeholder="Email"
-          textContentType="emailAddress"
-        />
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock"
-          name="password"
-          placeholder="Password"
-          secureTextEntry
-          textContentType="password"
-        />
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock-check"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          secureTextEntry
-          textContentType="password"
-        />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock-check"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            secureTextEntry
+            textContentType="password"
+          />
 
-        <SubmitButton title="Register" />
-      </Form>
-    </Screen>
+          <SubmitButton title="Register" />
+        </Form>
+      </Screen>
+    </>
   );
 };
 
