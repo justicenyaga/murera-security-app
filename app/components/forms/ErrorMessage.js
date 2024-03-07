@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 
 ErrorMessage.propTypes = {
   error: PropTypes.string,
-  visible: PropTypes.bool,
+  visible: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default ErrorMessage;
