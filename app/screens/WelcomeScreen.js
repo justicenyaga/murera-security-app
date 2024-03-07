@@ -1,10 +1,13 @@
 import React from "react";
 import { View, StyleSheet, ImageBackground, Image, Text } from "react-native";
+import PropTypes from "prop-types";
 
 import Button from "../components/Button";
-import colors from "../config/colors";
 
-const WelcomeScreen = () => {
+import colors from "../config/colors";
+import routes from "../navigation/routes";
+
+const WelcomeScreen = ({ navigation }) => {
   return (
     <ImageBackground
       blurRadius={10}
@@ -17,11 +20,14 @@ const WelcomeScreen = () => {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <Button title="Login" onPress={() => console.log("Login")} />
+        <Button
+          title="Login"
+          onPress={() => navigation.navigate(routes.LOGIN)}
+        />
         <Button
           title="Register"
           color="secondary"
-          onPress={() => console.log("Register")}
+          onPress={() => navigation.navigate(routes.REGISTER)}
         />
       </View>
     </ImageBackground>
@@ -54,5 +60,9 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
 });
+
+WelcomeScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export default WelcomeScreen;

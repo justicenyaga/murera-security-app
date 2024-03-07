@@ -34,7 +34,7 @@ const RegisterScreen = () => {
   };
 
   return (
-    <Screen style={styles.container}>
+    <Screen style={styles.container} disablePaddingTop>
       <Image style={styles.logo} source={require("../assets/logo.png")} />
 
       <Form
