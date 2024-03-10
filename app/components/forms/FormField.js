@@ -6,7 +6,7 @@ import { useFormikContext } from "formik";
 import ErrorMessage from "./ErrorMessage";
 import TextInput from "../TextInput";
 
-const FormField = ({ name, width, ...rest }) => {
+const FormField = ({ name, width, isPasswordField, ...rest }) => {
   const { setFieldTouched, setFieldValue, errors, touched, values } =
     useFormikContext();
 
@@ -16,6 +16,7 @@ const FormField = ({ name, width, ...rest }) => {
         onBlur={() => setFieldTouched(name)}
         onChangeText={(text) => setFieldValue(name, text)}
         value={values[name]}
+        isPasswordField={isPasswordField}
         {...rest}
       />
       <ErrorMessage error={errors[name]} visible={touched[name]} />
@@ -26,6 +27,7 @@ const FormField = ({ name, width, ...rest }) => {
 FormField.propTypes = {
   name: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  isPasswordField: PropTypes.bool,
 };
 
 export default FormField;
