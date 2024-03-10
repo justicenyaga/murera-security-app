@@ -65,7 +65,7 @@ const LoginScreen = () => {
             icon="lock"
             name="password"
             placeholder="Password"
-            secureTextEntry
+            isPasswordField
             textContentType="password"
           />
           <SubmitButton title="Login" />

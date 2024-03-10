@@ -121,7 +121,7 @@ const RegisterScreen = () => {
             icon="lock"
             name="password"
             placeholder="Password"
-            secureTextEntry
+            isPasswordField
             textContentType="password"
           />
           <FormField
@@ -130,7 +130,7 @@ const RegisterScreen = () => {
             icon="lock-check"
             name="confirmPassword"
             placeholder="Confirm Password"
-            secureTextEntry
+            isPasswordField
             textContentType="password"
           />
 
