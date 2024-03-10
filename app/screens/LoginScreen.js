@@ -1,9 +1,16 @@
 import React, { useState } from "react";
-import { Image, StyleSheet } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import * as Yup from "yup";
+import PropTypes from "prop-types";
 
 import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";
+import Text from "../components/Text";
 import {
   ErrorMessage,
   Form,
@@ -14,13 +21,14 @@ import {
 import authApi from "../api/auth";
 import useAuth from "../auth/useAuth";
 import useApi from "../hooks/useApi";
+import routes from "../navigation/routes";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().label("Password"),
 });
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const auth = useAuth();
   const loginApi = useApi(authApi.login);
 
@@ -69,6 +77,15 @@ const LoginScreen = () => {
             textContentType="password"
           />
           <SubmitButton title="Login" />
+
+          <View style={styles.registerContainer}>
+            <Text>Dont have an account? </Text>
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate(routes.REGISTER)}
+            >
+              <Text style={styles.register}>Register</Text>
+            </TouchableWithoutFeedback>
+          </View>
         </Form>
       </Screen>
     </>
@@ -86,6 +103,19 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 20,
   },
+  register: {
+    color: "dodgerblue",
+    fontWeight: "bold",
+  },
+  registerContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 20,
+  },
 });
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export default LoginScreen;

@@ -1,11 +1,18 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+} from "react-native";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import _ from "lodash";
+import PropTypes from "prop-types";
 
 import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";
+import Text from "../components/Text";
 import {
   ErrorMessage,
   Form,
@@ -13,6 +20,7 @@ import {
   SubmitButton,
 } from "../components/forms";
 
+import routes from "../navigation/routes";
 import authApi from "../api/auth";
 import usersApi from "../api/users";
 import useApi from "../hooks/useApi";
@@ -40,7 +48,7 @@ const validationSchema = Yup.object().shape({
   ),
 });
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }) => {
   const auth = useAuth();
   const registerApi = useApi(usersApi.register);
   const loginApi = useApi(authApi.login);
@@ -135,6 +143,15 @@ const RegisterScreen = () => {
           />
 
           <SubmitButton title="Register" />
+
+          <View style={styles.loginContainer}>
+            <Text>Already have an account? </Text>
+            <TouchableWithoutFeedback
+              onPress={() => navigation.navigate(routes.LOGIN)}
+            >
+              <Text style={styles.login}>Login</Text>
+            </TouchableWithoutFeedback>
+          </View>
         </Form>
       </Screen>
     </>
@@ -144,6 +161,15 @@ const RegisterScreen = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
+  },
+  login: {
+    color: "dodgerblue",
+    fontWeight: "bold",
+  },
+  loginContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 20,
   },
   logo: {
     width: 80,
@@ -157,5 +183,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
+
+RegisterScreen.propTypes = {
+  navigation: PropTypes.object.isRequired,
+};
 
 export default RegisterScreen;
