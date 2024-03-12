@@ -41,5 +41,6 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.34.0"
   },
-  "private": true
+  "private": true,
+  "packageManager": "yarn@4.1.1"
 }
