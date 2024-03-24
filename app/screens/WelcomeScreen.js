@@ -3,11 +3,15 @@ import { View, StyleSheet, ImageBackground, Image, Text } from "react-native";
 import PropTypes from "prop-types";
 
 import Button from "../components/Button";
+import Link from "../components/Link";
 
 import colors from "../config/colors";
 import routes from "../navigation/routes";
+import useAuth from "../auth/useAuth";
 
 const WelcomeScreen = ({ navigation }) => {
+  const { user } = useAuth();
+
   return (
     <ImageBackground
       blurRadius={10}
@@ -20,6 +24,14 @@ const WelcomeScreen = ({ navigation }) => {
       </View>
 
       <View style={styles.buttonsContainer}>
+        {user && !user.isActive && (
+          <View style={{ marginVertical: 10, alignItems: "center" }}>
+            <Link
+              text="Activate Account"
+              onPress={() => navigation.navigate(routes.ACTIVATION)}
+            />
+          </View>
+        )}
         <Button
           title="Login"
           onPress={() => navigation.navigate(routes.LOGIN)}
