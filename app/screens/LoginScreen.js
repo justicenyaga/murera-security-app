@@ -22,8 +22,8 @@ const validationSchema = Yup.object().shape({
 
 const LoginScreen = ({ navigation }) => {
   const toast = useToast();
-  const auth = useAuth();
   const loginApi = useApi(authApi.login);
+  const { user, logIn } = useAuth();
 
   const handleSubmit = async ({ email, password }) => {
     const { ok, status, data } = await loginApi.request(email, password);
@@ -34,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
       return;
     }
 
-    auth.logIn(data);
+    logIn(data);
   };
 
   return (
@@ -42,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
       <ActivityIndicator visible={loginApi.loading} />
       <Screen style={styles.container} disablePaddingTop>
         <Form
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ email: user ? user.email : "", password: "" }}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
