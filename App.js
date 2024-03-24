@@ -9,6 +9,7 @@ import navigationTheme from "./app/navigation/navigationTheme";
 import AuthContext from "./app/auth/context";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import AppNavigator from "./app/navigation/AppNavigator";
+import ToastProvider from "./app/components/ToastProvider";
 
 // Keep the splash screen visible while we fetch the resources
 SplashScreen.preventAutoHideAsync();
@@ -39,11 +40,13 @@ const App = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
-      <AuthContext.Provider value={{ user, setUser }}>
-        <NavigationContainer theme={navigationTheme}>
-          {user ? <AppNavigator /> : <AuthNavigator />}
-        </NavigationContainer>
-      </AuthContext.Provider>
+      <ToastProvider>
+        <AuthContext.Provider value={{ user, setUser }}>
+          <NavigationContainer theme={navigationTheme}>
+            {user?.isActive ? <AppNavigator /> : <AuthNavigator />}
+          </NavigationContainer>
+        </AuthContext.Provider>
+      </ToastProvider>
     </GestureHandlerRootView>
   );
 };
