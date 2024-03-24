@@ -64,7 +64,10 @@ const RegisterScreen = ({ navigation }) => {
       userInfo.email,
       userInfo.password,
     );
+
     auth.logIn(authToken);
+
+    navigation.navigate(routes.ACTIVATION);
   };
 
   return (

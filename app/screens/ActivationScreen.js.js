@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { useToast } from "react-native-toast-notifications";
 
 import ActivityIndicator from "../components/ActivityIndicator";
@@ -9,7 +8,6 @@ import Icon from "../components/Icon";
 import ResendTimer from "../components/ResendTimer";
 import Text from "../components/Text";
 
-import routes from "../navigation/routes";
 import usersApi from "../api/users";
 import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
@@ -18,7 +16,6 @@ const resendTimerDuration = 30; // seconds
 
 const ActivationScreen = () => {
   const toast = useToast();
-  const navigation = useNavigation();
   const resendVerificationApi = useApi(usersApi.resendVerification);
   const refreshAuthTokenApi = useApi(usersApi.refreshAuthToken);
   const { user, logIn } = useAuth();
@@ -26,11 +23,6 @@ const ActivationScreen = () => {
   const [timeLeft, setTimeLeft] = useState();
 
   let resendTimerInterval;
-
-  useEffect(() => {
-    !user && navigation.navigate(routes.WELCOME);
-    user.isActive && navigation.navigate(routes.HOME);
-  }, [user]);
 
   const calculateTimeLeft = (finalTime) => {
     const difference = finalTime - +new Date();
