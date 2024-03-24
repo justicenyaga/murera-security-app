@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image, StyleSheet, View, ScrollView } from "react-native";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import _ from "lodash";
 import PropTypes from "prop-types";
+import { useToast } from "react-native-toast-notifications";
 
 import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";
 import TextLink from "../components/TextLink";
-import {
-  ErrorMessage,
-  Form,
-  FormField,
-  SubmitButton,
-} from "../components/forms";
+import { Form, FormField, SubmitButton } from "../components/forms";
 
 import authApi from "../api/auth";
 import routes from "../navigation/routes";
@@ -44,11 +40,10 @@ const validationSchema = Yup.object().shape({
 });
 
 const RegisterScreen = ({ navigation }) => {
+  const toast = useToast();
   const auth = useAuth();
   const registerApi = useApi(usersApi.register);
   const loginApi = useApi(authApi.login);
-
-  const [error, setError] = useState();
 
   const handleSubmit = async (userInfo) => {
     const data = _.pick(userInfo, [
@@ -59,8 +54,9 @@ const RegisterScreen = ({ navigation }) => {
     ]);
     const result = await registerApi.request(data);
     if (!result.ok) {
-      if (result.status === 500) setError("An unexpected error occurred");
-      else setError(result.data);
+      if (result.status === 500) {
+        toast.show("An unexpected error occurred", { type: "error" });
+      } else toast.show(result.data, { type: "error" });
       return;
     }
 
@@ -89,7 +85,6 @@ const RegisterScreen = ({ navigation }) => {
           <ScrollView>
             <Image style={styles.logo} source={require("../assets/logo.png")} />
 
-            <ErrorMessage error={error} visible={error} />
             <View style={styles.name}>
               <FormField
                 autoCorrect={false}
