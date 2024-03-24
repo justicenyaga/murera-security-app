@@ -47,13 +47,13 @@ const ActivationScreen = () => {
   };
 
   const refreshAuthToken = async () => {
-    const { ok, data } = await refreshAuthTokenApi.request();
+    const { ok, data, headers } = await refreshAuthTokenApi.request();
     if (!ok) return toast.show(data, { type: "error" });
-    logIn(data);
 
-    if (!user.isActive) {
-      toast.show("Email not verified", { type: "error" });
-    }
+    const authToken = headers["x-auth-token"];
+
+    if (data.isActive) logIn(authToken);
+    else toast.show("Email not verified", { type: "error" });
   };
 
   return (
@@ -77,7 +77,7 @@ const ActivationScreen = () => {
           <Text style={styles.text}>
             Please verify your email using the link sent to{" "}
           </Text>
-          <Text style={styles.email}>{user.email}</Text>
+          <Text style={styles.email}>{user?.email}</Text>
         </View>
 
         <Button title="Proceed" onPress={refreshAuthToken} />
