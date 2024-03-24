@@ -35,6 +35,8 @@ const LoginScreen = ({ navigation }) => {
     }
 
     logIn(data);
+
+    if (!user.isActive) navigation.navigate(routes.ACTIVATION);
   };
 
   return (
