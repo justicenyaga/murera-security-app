@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Image,
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-} from "react-native";
+import { Image, StyleSheet, View, ScrollView } from "react-native";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 import _ from "lodash";
@@ -12,7 +7,7 @@ import PropTypes from "prop-types";
 
 import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";
-import Text from "../components/Text";
+import TextLink from "../components/TextLink";
 import {
   ErrorMessage,
   Form,
@@ -20,8 +15,8 @@ import {
   SubmitButton,
 } from "../components/forms";
 
-import routes from "../navigation/routes";
 import authApi from "../api/auth";
+import routes from "../navigation/routes";
 import usersApi from "../api/users";
 import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
@@ -64,12 +59,8 @@ const RegisterScreen = ({ navigation }) => {
     ]);
     const result = await registerApi.request(data);
     if (!result.ok) {
-      if (result.data) setError(result.data);
-      else {
-        setError("An unexpected error occurred");
-        console.log(result);
-      }
-
+      if (result.status === 500) setError("An unexpected error occurred");
+      else setError(result.data);
       return;
     }
 
@@ -84,8 +75,6 @@ const RegisterScreen = ({ navigation }) => {
     <>
       <ActivityIndicator visible={registerApi.loading || loginApi.loading} />
       <Screen style={styles.container} disablePaddingTop>
-        <Image style={styles.logo} source={require("../assets/logo.png")} />
-
         <Form
           initialValues={{
             firstName: "",
@@ -97,61 +86,62 @@ const RegisterScreen = ({ navigation }) => {
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
-          <ErrorMessage error={error} visible={error} />
-          <View style={styles.name}>
+          <ScrollView>
+            <Image style={styles.logo} source={require("../assets/logo.png")} />
+
+            <ErrorMessage error={error} visible={error} />
+            <View style={styles.name}>
+              <FormField
+                autoCorrect={false}
+                icon="account"
+                name="firstName"
+                placeholder="First Name"
+                width="49%"
+              />
+              <FormField
+                autoCorrect={false}
+                icon="account"
+                name="lastName"
+                placeholder="Last Name"
+                width="49%"
+              />
+            </View>
             <FormField
+              autoCapitalize="none"
               autoCorrect={false}
-              icon="account"
-              name="firstName"
-              placeholder="First Name"
-              width="49%"
+              icon="email"
+              keyboardType="email-address"
+              name="email"
+              placeholder="Email"
+              textContentType="emailAddress"
             />
             <FormField
+              autoCapitalize="none"
               autoCorrect={false}
-              icon="account"
-              name="lastName"
-              placeholder="Last Name"
-              width="49%"
+              icon="lock"
+              name="password"
+              placeholder="Password"
+              isPasswordField
+              textContentType="password"
             />
-          </View>
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="email"
-            keyboardType="email-address"
-            name="email"
-            placeholder="Email"
-            textContentType="emailAddress"
-          />
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="lock"
-            name="password"
-            placeholder="Password"
-            isPasswordField
-            textContentType="password"
-          />
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            icon="lock-check"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            isPasswordField
-            textContentType="password"
-          />
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock-check"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              isPasswordField
+              textContentType="password"
+            />
+          </ScrollView>
 
           <SubmitButton title="Register" />
 
-          <View style={styles.loginContainer}>
-            <Text>Already have an account? </Text>
-            <TouchableWithoutFeedback
-              onPress={() => navigation.navigate(routes.LOGIN)}
-            >
-              <Text style={styles.login}>Login</Text>
-            </TouchableWithoutFeedback>
-          </View>
+          <TextLink
+            onPress={() => navigation.navigate(routes.LOGIN)}
+            text="Already have an account?"
+            linkText="Login"
+          />
         </Form>
       </Screen>
     </>
@@ -161,15 +151,6 @@ const RegisterScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-  },
-  login: {
-    color: "dodgerblue",
-    fontWeight: "bold",
-  },
-  loginContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    marginTop: 20,
   },
   logo: {
     width: 80,
