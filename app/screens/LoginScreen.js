@@ -16,7 +16,32 @@ import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label("Email"),
+  identifier: Yup.string()
+    .required("Email or National ID is required")
+    .test({
+      name: "isEmailOrNationalId",
+      skipAbsent: true,
+      test(value, ctx) {
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        const numberOnlyRegex = /^[0-9]+$/;
+
+        const isValidNationalID = () => {
+          const parsedValue = parseInt(value);
+          return parsedValue >= 100000 && parsedValue <= 50000000;
+        };
+
+        const invalidIDMsg = "National ID must be a valid ID number";
+        const invalidEmailMsg = "Email must be a valid email";
+
+        if (emailRegex.test(value)) return true;
+        else {
+          if (numberOnlyRegex.test(value)) {
+            if (isValidNationalID()) return true;
+            else return ctx.createError({ message: invalidIDMsg });
+          } else return ctx.createError({ message: invalidEmailMsg });
+        }
+      },
+    }),
   password: Yup.string().required().label("Password"),
 });
 
@@ -25,8 +50,8 @@ const LoginScreen = ({ navigation }) => {
   const loginApi = useApi(authApi.login);
   const { user, logIn } = useAuth();
 
-  const handleSubmit = async ({ email, password }) => {
-    const { ok, status, data } = await loginApi.request(email, password);
+  const handleSubmit = async ({ identifier, password }) => {
+    const { ok, status, data } = await loginApi.request(identifier, password);
     if (!ok) {
       if (status === 500) {
         toast.show("An unexpected error occurred.", { type: "error" });
@@ -44,7 +69,7 @@ const LoginScreen = ({ navigation }) => {
       <ActivityIndicator visible={loginApi.loading} />
       <Screen style={styles.container} disablePaddingTop>
         <Form
-          initialValues={{ email: user ? user.email : "", password: "" }}
+          initialValues={{ identifier: user ? user.email : "", password: "" }}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
@@ -57,10 +82,9 @@ const LoginScreen = ({ navigation }) => {
               <FormField
                 autoCapitalize="none"
                 autoCorrect={false}
-                icon="email"
-                keyboardType="email-address"
-                name="email"
-                placeholder="Email"
+                icon="account"
+                name="identifier"
+                placeholder="Email or National ID"
                 textContentType="emailAddress"
               />
               <FormField

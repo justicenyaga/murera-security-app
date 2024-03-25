@@ -2,7 +2,11 @@ import client from "./client";
 
 const endpoint = "/auth";
 
-const login = (email, password) => client.post(endpoint, { email, password });
+const login = (identifier, password) => {
+  return identifier.includes("@")
+    ? client.post(endpoint, { email: identifier, password })
+    : client.post(endpoint, { nationalId: identifier, password });
+};
 
 const refreshAuthToken = () => client.post(endpoint + "/refresh-token");
 
