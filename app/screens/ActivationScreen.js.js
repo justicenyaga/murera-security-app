@@ -8,6 +8,7 @@ import Icon from "../components/Icon";
 import ResendTimer from "../components/ResendTimer";
 import Text from "../components/Text";
 
+import authApi from "../api/auth";
 import usersApi from "../api/users";
 import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
@@ -17,7 +18,7 @@ const resendTimerDuration = 30; // seconds
 const ActivationScreen = () => {
   const toast = useToast();
   const resendVerificationApi = useApi(usersApi.resendVerification);
-  const refreshAuthTokenApi = useApi(usersApi.refreshAuthToken);
+  const refreshAuthTokenApi = useApi(authApi.refreshAuthToken);
   const { user, logIn } = useAuth();
 
   const [timeLeft, setTimeLeft] = useState();
