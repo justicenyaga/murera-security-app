@@ -25,6 +25,11 @@ const validationSchema = Yup.object().shape({
     .label("First Name"),
   lastName: Yup.string().required("Last name is required").label("Last Name"),
   email: Yup.string().required().email().label("Email"),
+  nationalId: Yup.number()
+    .required()
+    .min(100000, "National ID must be a valid ID number")
+    .max(50000000, "National ID must be a valid ID number")
+    .label("National ID"),
   password: Yup.string()
     .required()
     .min(8)
@@ -49,6 +54,7 @@ const RegisterScreen = ({ navigation }) => {
     const data = _.pick(userInfo, [
       "firstName",
       "lastName",
+      "nationalId",
       "email",
       "password",
     ]);
@@ -79,6 +85,7 @@ const RegisterScreen = ({ navigation }) => {
           initialValues={{
             firstName: "",
             lastName: "",
+            nationalId: "",
             email: "",
             password: "",
             confirmPassword: "",
@@ -105,6 +112,14 @@ const RegisterScreen = ({ navigation }) => {
                 width="49%"
               />
             </View>
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="card-account-details"
+              keyboardType="numeric"
+              name="nationalId"
+              placeholder="National ID"
+            />
             <FormField
               autoCapitalize="none"
               autoCorrect={false}
