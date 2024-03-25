@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet } from "react-native";
 import * as Yup from "yup";
 import PropTypes from "prop-types";
 import { useToast } from "react-native-toast-notifications";
@@ -77,37 +77,32 @@ const LoginScreen = ({ navigation }) => {
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
-          <View>
-            <ScrollView>
-              <Image
-                style={styles.logo}
-                source={require("../assets/logo.png")}
-              />
-              <FormField
-                autoCapitalize="none"
-                autoCorrect={false}
-                icon="account"
-                name="identifier"
-                placeholder="Email or National ID"
-                textContentType="emailAddress"
-              />
-              <FormField
-                autoCapitalize="none"
-                autoCorrect={false}
-                icon="lock"
-                name="password"
-                placeholder="Password"
-                isPasswordField
-                textContentType="password"
-              />
+          <ScrollView>
+            <Image style={styles.logo} source={require("../assets/logo.png")} />
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="account"
+              name="identifier"
+              placeholder="Email or National ID"
+              textContentType="emailAddress"
+            />
+            <FormField
+              autoCapitalize="none"
+              autoCorrect={false}
+              icon="lock"
+              name="password"
+              placeholder="Password"
+              isPasswordField
+              textContentType="password"
+            />
 
-              <Link
-                onPress={() => console.log("Forgot password?")}
-                text="Forgot password?"
-                style={styles.forgotPassword}
-              />
-            </ScrollView>
-          </View>
+            <Link
+              onPress={() => navigation.navigate(routes.FORGOT_PASSWORD)}
+              text="Forgot password?"
+              style={styles.forgotPassword}
+            />
+          </ScrollView>
 
           <SubmitButton title="Login" />
 
