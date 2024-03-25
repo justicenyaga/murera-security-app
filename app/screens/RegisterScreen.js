@@ -60,11 +60,12 @@ const RegisterScreen = ({ navigation }) => {
       return;
     }
 
-    const { data: authToken } = await loginApi.request(
+    const { headers } = await loginApi.request(
       userInfo.email,
       userInfo.password,
     );
 
+    const authToken = headers["x-auth-token"];
     auth.logIn(authToken);
 
     navigation.navigate(routes.ACTIVATION);

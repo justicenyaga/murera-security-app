@@ -51,7 +51,10 @@ const LoginScreen = ({ navigation }) => {
   const { user, logIn } = useAuth();
 
   const handleSubmit = async ({ identifier, password }) => {
-    const { ok, status, data } = await loginApi.request(identifier, password);
+    const { ok, status, headers, data } = await loginApi.request(
+      identifier,
+      password,
+    );
     if (!ok) {
       if (status === 500) {
         toast.show("An unexpected error occurred.", { type: "error" });
@@ -59,9 +62,10 @@ const LoginScreen = ({ navigation }) => {
       return;
     }
 
-    logIn(data);
+    const authToken = headers["x-auth-token"];
+    logIn(authToken);
 
-    if (!user.isActive) navigation.navigate(routes.ACTIVATION);
+    if (!data.isActive) navigation.navigate(routes.ACTIVATION);
   };
 
   return (
