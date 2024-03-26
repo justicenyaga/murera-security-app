@@ -15,8 +15,12 @@ const passwordResetRequest = (identifier) => {
     : client.post(url, { nationalId: identifier });
 };
 
+const verifyPasswordResetOtp = (otp) =>
+  client.post(endpoint + "/verify-password-reset-otp", { otp });
+
 export default {
   passwordResetRequest,
   register,
   resendVerification,
+  verifyPasswordResetOtp,
 };
