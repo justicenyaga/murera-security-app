@@ -21,9 +21,9 @@ YupPassword(Yup);
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
-    .required("First name is required")
+    .required("First Name is required")
     .label("First Name"),
-  lastName: Yup.string().required("Last name is required").label("Last Name"),
+  lastName: Yup.string().required("Last Name is required").label("Last Name"),
   email: Yup.string().required().email().label("Email"),
   nationalId: Yup.number()
     .required()
@@ -38,10 +38,10 @@ const validationSchema = Yup.object().shape({
     .minNumbers(1, "Password must contain at least one number")
     .minSymbols(1, "Password must contain at least one special character")
     .label("Password"),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match",
-  ),
+  confirmPassword: Yup.string()
+    .required()
+    .oneOf([Yup.ref("password")], "Passwords must match")
+    .label("Confirm Password"),
 });
 
 const RegisterScreen = ({ navigation }) => {

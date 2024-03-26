@@ -23,10 +23,10 @@ const validationSchema = Yup.object().shape({
     .minNumbers(1, "Password must contain at least one number")
     .minSymbols(1, "Password must contain at least one special character")
     .label("New Password"),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match",
-  ),
+  confirmPassword: Yup.string()
+    .required()
+    .oneOf([Yup.ref("password")], "Passwords must match")
+    .label("Confirm Password"),
 });
 
 const ResetPasswordScreen = () => {
