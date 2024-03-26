@@ -4,5 +4,6 @@ export default Object.freeze({
   LOGIN: "Login",
   OTP_VERIFICATION: "OtpVerification",
   REGISTER: "Register",
+  RESET_PASSWORD: "ResetPassword",
   WELCOME: "Welcome",
 });

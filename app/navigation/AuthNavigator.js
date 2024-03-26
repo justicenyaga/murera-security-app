@@ -8,6 +8,7 @@ import ForgotPasswordScreen from "../screens/ForgotPasswordScreen.js";
 import LoginScreen from "../screens/LoginScreen";
 import OtpVerificationScreen from "../screens/OtpVerificationScreen.js";
 import RegisterScreen from "../screens/RegisterScreen";
+import ResetPasswordScreen from "../screens/ResetPasswordScreen.js";
 import WelcomeScreen from "../screens/WelcomeScreen";
 
 const Stack = createStackNavigator();
@@ -36,6 +37,11 @@ const AuthNavigator = () => (
       options={{ title: "" }}
     />
     <Stack.Screen name={routes.REGISTER} component={RegisterScreen} />
+    <Stack.Screen
+      name={routes.RESET_PASSWORD}
+      component={ResetPasswordScreen}
+      options={{ title: "" }}
+    />
   </Stack.Navigator>
 );
 
