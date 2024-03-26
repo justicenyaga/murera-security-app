@@ -4,10 +4,13 @@ import PropTypes from "prop-types";
 
 import colors from "../config/colors";
 
-const Button = ({ title, onPress, color = "primary" }) => {
+const Button = ({ title, onPress, color = "primary", disabled = false }) => {
+  const backgroundColor = disabled ? colors.medium : colors[color];
+
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: colors[color] }]}
+      style={[styles.button, { backgroundColor }]}
+      disabled={disabled}
       onPress={onPress}
     >
       <Text style={styles.text}>{title}</Text>
@@ -18,7 +21,6 @@ const Button = ({ title, onPress, color = "primary" }) => {
 const styles = StyleSheet.create({
   button: {
     alignItems: "center",
-    backgroundColor: colors.primary,
     borderRadius: 25,
     justifyContent: "center",
     marginVertical: 10,
@@ -37,6 +39,7 @@ Button.propTypes = {
   title: PropTypes.string,
   onPress: PropTypes.func,
   color: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 export default Button;
