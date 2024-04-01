@@ -2602,6 +2602,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/datetimepicker@npm:7.6.1":
+  version: 7.6.1
+  resolution: "@react-native-community/datetimepicker@npm:7.6.1"
+  dependencies:
+    invariant: "npm:^2.2.4"
+  checksum: 10c0/20d9b35747532e2031b981305f16998e1bd4c651e2c44cd65c4dd5bd4ebe66fd0ed49292bc6883821faf56c1cb3698b16c2b8fb1e9782b8c6f00f3506cf8ee55
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.73.1, @react-native/assets-registry@npm:~0.73.1":
   version: 0.73.1
   resolution: "@react-native/assets-registry@npm:0.73.1"
@@ -8160,6 +8169,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@react-native-async-storage/async-storage": "npm:1.21.0"
+    "@react-native-community/datetimepicker": "npm:7.6.1"
     "@react-navigation/bottom-tabs": "npm:^6.5.16"
     "@react-navigation/native": "npm:^6.1.14"
     "@react-navigation/stack": "npm:^6.3.25"
