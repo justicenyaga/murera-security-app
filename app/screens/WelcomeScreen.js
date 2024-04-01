@@ -38,7 +38,7 @@ const WelcomeScreen = ({ navigation }) => {
         />
         <Button
           title="Register"
-          color="secondary"
+          backgroundColor={colors.secondary}
           onPress={() => navigation.navigate(routes.REGISTER)}
         />
       </View>
