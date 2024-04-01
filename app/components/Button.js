@@ -7,6 +7,8 @@ import colors from "../config/colors";
 const Button = ({
   title,
   onPress,
+  style,
+  textStyle,
   backgroundColor = colors.primary,
   disabled = false,
 }) => {
@@ -14,11 +16,11 @@ const Button = ({
 
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: bgColor }]}
+      style={[styles.button, { backgroundColor: bgColor }, style]}
       disabled={disabled}
       onPress={onPress}
     >
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -44,7 +46,9 @@ Button.propTypes = {
   backgroundColor: PropTypes.string,
   disabled: PropTypes.bool,
   onPress: PropTypes.func,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   title: PropTypes.string,
+  textStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
 
 export default Button;
