@@ -12,6 +12,7 @@ import TextLink from "../components/TextLink";
 import { Form, FormField, SubmitButton } from "../components/forms";
 
 import authApi from "../api/auth";
+import defaultStyles from "../config/styles";
 import routes from "../navigation/routes";
 import usersApi from "../api/users";
 import useApi from "../hooks/useApi";
@@ -94,7 +95,10 @@ const RegisterScreen = ({ navigation }) => {
           validationSchema={validationSchema}
         >
           <ScrollView>
-            <Image style={styles.logo} source={require("../assets/logo.png")} />
+            <Image
+              style={defaultStyles.form.logo}
+              source={require("../assets/logo.png")}
+            />
 
             <View style={styles.name}>
               <FormField
@@ -165,13 +169,6 @@ const RegisterScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-  },
-  logo: {
-    width: 80,
-    height: 80,
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
   },
   name: {
     flexDirection: "row",

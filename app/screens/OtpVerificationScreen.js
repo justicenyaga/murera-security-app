@@ -10,6 +10,7 @@ import Screen from "../components/Screen";
 import Text from "../components/Text";
 
 import colors from "../config/colors";
+import defaultStyles from "../config/styles";
 import routes from "../navigation/routes";
 import usersApi from "../api/users";
 import useApi from "../hooks/useApi";
@@ -38,10 +39,13 @@ const OtpVerificationScreen = () => {
       <ActivityIndicator visible={verifyPasswordResetOtpApi.loading} />
       <Screen style={styles.screen}>
         <ScrollView>
-          <Image style={styles.logo} source={require("../assets/logo.png")} />
+          <Image
+            style={defaultStyles.form.logo}
+            source={require("../assets/logo.png")}
+          />
 
-          <Text style={styles.header}>Verification</Text>
-          <Text style={styles.info}>
+          <Text style={defaultStyles.form.heading}>Verification</Text>
+          <Text style={[defaultStyles.form.desc, styles.desc]}>
             We have sent an OTP to your email address. Please enter it below.
           </Text>
 
@@ -66,23 +70,8 @@ const styles = StyleSheet.create({
   screen: {
     padding: 10,
   },
-  header: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginBottom: 7,
-    textAlign: "center",
-  },
-  info: {
-    color: "#777",
-    textAlign: "center",
+  desc: {
     marginBottom: 40,
-  },
-  logo: {
-    alignSelf: "center",
-    height: 80,
-    marginBottom: 20,
-    marginTop: 50,
-    width: 80,
   },
 });
 

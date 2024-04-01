@@ -10,6 +10,7 @@ import Text from "../components/Text";
 import { Form, FormField, SubmitButton } from "../components/forms";
 
 import authApi from "../api/auth";
+import defaultStyles from "../config/styles";
 import usersApi from "../api/users";
 import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
@@ -59,10 +60,15 @@ const ResetPasswordScreen = () => {
           validationSchema={validationSchema}
         >
           <ScrollView>
-            <Image style={styles.logo} source={require("../assets/logo.png")} />
+            <Image
+              style={defaultStyles.form.logo}
+              source={require("../assets/logo.png")}
+            />
 
-            <Text style={styles.header}>Reset Password</Text>
-            <Text style={styles.info}>Create a new secure password</Text>
+            <Text style={defaultStyles.form.heading}>Reset Password</Text>
+            <Text style={defaultStyles.form.desc}>
+              Create a new secure password
+            </Text>
 
             <FormField
               autoCapitalize="none"
@@ -94,24 +100,6 @@ const ResetPasswordScreen = () => {
 const styles = StyleSheet.create({
   screen: {
     padding: 10,
-  },
-  header: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginBottom: 7,
-    textAlign: "center",
-  },
-  info: {
-    color: "#777",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  logo: {
-    alignSelf: "center",
-    height: 80,
-    marginBottom: 20,
-    marginTop: 50,
-    width: 80,
   },
 });
 

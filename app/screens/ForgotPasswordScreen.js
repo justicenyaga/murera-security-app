@@ -10,6 +10,7 @@ import Text from "../components/Text";
 import TextLink from "../components/TextLink";
 import { Form, FormField, SubmitButton } from "../components/forms";
 
+import defaultStyles from "../config/styles";
 import emailOrNationalIDTest from "../utils/emailOrNationalIDTest";
 import routes from "../navigation/routes";
 import usersApi from "../api/users";
@@ -42,10 +43,13 @@ const ForgotPasswordScreen = () => {
           validationSchema={validationSchema}
         >
           <ScrollView>
-            <Image style={styles.logo} source={require("../assets/logo.png")} />
+            <Image
+              style={defaultStyles.form.logo}
+              source={require("../assets/logo.png")}
+            />
 
-            <Text style={styles.header}>Forgot Password</Text>
-            <Text style={styles.info}>
+            <Text style={defaultStyles.form.heading}>Forgot Password</Text>
+            <Text style={defaultStyles.form.desc}>
               Let&apos;s help you reset your password
             </Text>
 
@@ -74,24 +78,6 @@ const ForgotPasswordScreen = () => {
 const styles = StyleSheet.create({
   screen: {
     padding: 10,
-  },
-  header: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginBottom: 7,
-    textAlign: "center",
-  },
-  info: {
-    color: "#777",
-    textAlign: "center",
-    marginBottom: 20,
-  },
-  logo: {
-    alignSelf: "center",
-    height: 80,
-    marginBottom: 20,
-    marginTop: 50,
-    width: 80,
   },
 });
 

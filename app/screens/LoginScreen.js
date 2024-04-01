@@ -11,6 +11,7 @@ import TextLink from "../components/TextLink";
 import { Form, FormField, SubmitButton } from "../components/forms";
 
 import authApi from "../api/auth";
+import defaultStyles from "../config/styles";
 import emailOrNationalIDTest from "../utils/emailOrNationalIDTest";
 import routes from "../navigation/routes";
 import useApi from "../hooks/useApi";
@@ -56,7 +57,10 @@ const LoginScreen = ({ navigation }) => {
           validationSchema={validationSchema}
         >
           <ScrollView>
-            <Image style={styles.logo} source={require("../assets/logo.png")} />
+            <Image
+              style={defaultStyles.form.logo}
+              source={require("../assets/logo.png")}
+            />
             <FormField
               autoCapitalize="none"
               autoCorrect={false}
@@ -101,13 +105,6 @@ const styles = StyleSheet.create({
   forgotPassword: {
     marginTop: 20,
     marginBottom: 30,
-  },
-  logo: {
-    width: 80,
-    height: 80,
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
   },
 });
 
