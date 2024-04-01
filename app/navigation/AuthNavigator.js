@@ -3,12 +3,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import routes from "./routes";
 
-import ActivationScreen from "../screens/ActivationScreen.js";
-import ForgotPasswordScreen from "../screens/ForgotPasswordScreen.js";
+import ActivationScreen from "../screens/ActivationScreen";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import LoginScreen from "../screens/LoginScreen";
-import OtpVerificationScreen from "../screens/OtpVerificationScreen.js";
+import OtpVerificationScreen from "../screens/OtpVerificationScreen";
 import RegisterScreen from "../screens/RegisterScreen";
-import ResetPasswordScreen from "../screens/ResetPasswordScreen.js";
+import ResetPasswordScreen from "../screens/ResetPasswordScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
 
 const Stack = createStackNavigator();
