@@ -25,5 +25,6 @@ module.exports = {
     quotes: "off",
     "comma-dangle": "off",
     "space-before-function-paren": "off",
+    "multiline-ternary": "off",
   },
 };
