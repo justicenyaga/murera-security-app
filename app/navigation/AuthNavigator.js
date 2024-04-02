@@ -30,13 +30,21 @@ const AuthNavigator = () => (
       component={ForgotPasswordScreen}
       options={{ title: "" }}
     />
-    <Stack.Screen name={routes.LOGIN} component={LoginScreen} />
+    <Stack.Screen
+      name={routes.LOGIN}
+      component={LoginScreen}
+      options={{ title: "Sign In" }}
+    />
     <Stack.Screen
       name={routes.OTP_VERIFICATION}
       component={OtpVerificationScreen}
       options={{ title: "" }}
     />
-    <Stack.Screen name={routes.REGISTER} component={RegisterScreen} />
+    <Stack.Screen
+      name={routes.REGISTER}
+      component={RegisterScreen}
+      options={{ title: "Sign Up" }}
+    />
     <Stack.Screen
       name={routes.RESET_PASSWORD}
       component={ResetPasswordScreen}

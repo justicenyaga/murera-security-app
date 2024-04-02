@@ -67,7 +67,7 @@ const ForgotPasswordScreen = () => {
           <TextLink
             onPress={() => navigation.navigate(routes.LOGIN)}
             text="Remembered your password?"
-            linkText="Login"
+            linkText="Sign In"
           />
         </Form>
       </Screen>

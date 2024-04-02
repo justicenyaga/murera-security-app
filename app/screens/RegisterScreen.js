@@ -153,12 +153,12 @@ const RegisterScreen = ({ navigation }) => {
             />
           </ScrollView>
 
-          <SubmitButton title="Register" />
+          <SubmitButton title="Sign Up" />
 
           <TextLink
             onPress={() => navigation.navigate(routes.LOGIN)}
             text="Already have an account?"
-            linkText="Login"
+            linkText="Sign In"
           />
         </Form>
       </Screen>
