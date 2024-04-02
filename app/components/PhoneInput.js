@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import PhoneInput from "react-native-phone-number-input";
+import RNPhoneNumberInput from "react-native-phone-number-input";
 import PropTypes from "prop-types";
 
 import defaultStyles from "../config/styles";
 
-const AppPhoneInput = ({
+const PhoneInput = ({
   placeholder,
   setCode,
   setValue,
@@ -15,7 +15,7 @@ const AppPhoneInput = ({
   const handleChangeCode = ({ callingCode }) => setCode(callingCode);
 
   return (
-    <PhoneInput
+    <RNPhoneNumberInput
       containerStyle={[styles.container, { width }]}
       codeTextStyle={defaultStyles.text}
       textContainerStyle={styles.textContainer}
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
 });
 
-AppPhoneInput.propTypes = {
+PhoneInput.propTypes = {
   placeholder: PropTypes.string,
   setCode: PropTypes.func,
   setValue: PropTypes.func,
@@ -55,4 +55,4 @@ AppPhoneInput.propTypes = {
   width: PropTypes.string,
 };
 
-export default AppPhoneInput;
+export default PhoneInput;

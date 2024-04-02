@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput as RNTextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import PropTypes from "prop-types";
 
 import defaultStyles from "../config/styles";
 
-const AppTextInput = ({
+const TextInput = ({
   icon,
   width = "100%",
   isPasswordField = false,
@@ -23,7 +23,7 @@ const AppTextInput = ({
           style={styles.icon}
         />
       )}
-      <TextInput
+      <RNTextInput
         placeholderTextColor={defaultStyles.colors.medium}
         style={[defaultStyles.text, { flex: 1 }]}
         secureTextEntry={isPasswordField && !showPassword}
@@ -59,10 +59,10 @@ const styles = StyleSheet.create({
   },
 });
 
-AppTextInput.propTypes = {
+TextInput.propTypes = {
   icon: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isPasswordField: PropTypes.bool,
 };
 
-export default AppTextInput;
+export default TextInput;

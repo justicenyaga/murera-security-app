@@ -8,7 +8,7 @@ import defaultStyles from "../config/styles";
 
 import Text from "./Text";
 
-const AppDatePicker = ({
+const DatePicker = ({
   date,
   icon,
   placeholder = "",
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
 });
 
-AppDatePicker.propTypes = {
+DatePicker.propTypes = {
   date: PropTypes.string,
   icon: PropTypes.string,
   placeholder: PropTypes.string,
@@ -86,4 +86,4 @@ AppDatePicker.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-export default AppDatePicker;
+export default DatePicker;
