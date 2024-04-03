@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import defaultStyles from "../config/styles";
 
 const PhoneInput = ({
+  defaultCode,
   placeholder,
   setCode,
   setValue,
@@ -30,7 +31,7 @@ const PhoneInput = ({
       autoFocus
       codeTextStyle={defaultStyles.text}
       containerStyle={[styles.container, { width }]}
-      defaultCode="KE"
+      defaultCode={defaultCode}
       defaultValue={value}
       layout="first"
       onChangeCountry={handleChangeCode}
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
 });
 
 PhoneInput.propTypes = {
+  defaultCode: PropTypes.string,
   placeholder: PropTypes.string,
   setCode: PropTypes.func,
   setValue: PropTypes.func,

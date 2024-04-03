@@ -5,12 +5,19 @@ import PropTypes from "prop-types";
 import ErrorMessage from "./ErrorMessage";
 import PhoneInput from "../PhoneInput";
 
-const FormPhoneInput = ({ codeName, name, placeholder, width }) => {
+const FormPhoneInput = ({
+  codeName,
+  defaultCode,
+  name,
+  placeholder,
+  width,
+}) => {
   const { errors, setFieldValue, touched, values } = useFormikContext();
 
   return (
     <>
       <PhoneInput
+        defaultCode={defaultCode}
         placeholder={placeholder}
         width={width}
         setCode={(text) => setFieldValue(codeName, text)}
@@ -24,6 +31,7 @@ const FormPhoneInput = ({ codeName, name, placeholder, width }) => {
 
 FormPhoneInput.propTypes = {
   codeName: PropTypes.string,
+  defaultCode: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
