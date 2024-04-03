@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { StyleSheet } from "react-native";
 import RNPhoneNumberInput from "react-native-phone-number-input";
 import PropTypes from "prop-types";
@@ -12,25 +12,37 @@ const PhoneInput = ({
   value,
   width = "100%",
 }) => {
-  const handleChangeCode = ({ callingCode }) => setCode(callingCode);
+  const phoneInput = useRef(null);
+
+  const handleChangeCode = ({ callingCode }) => setCode(callingCode[0]);
+
+  const handleChange = (text) => setValue(text);
+
+  const getMaxLength = () => {
+    const isValid = phoneInput.current?.isValidNumber(value);
+    if (isValid) return value.length;
+
+    return null;
+  };
 
   return (
     <RNPhoneNumberInput
-      containerStyle={[styles.container, { width }]}
+      autoFocus
       codeTextStyle={defaultStyles.text}
-      textContainerStyle={styles.textContainer}
-      defaultValue={value}
+      containerStyle={[styles.container, { width }]}
       defaultCode="KE"
+      defaultValue={value}
       layout="first"
-      textInputStyle={defaultStyles.text}
+      onChangeCountry={handleChangeCode}
+      onChangeText={handleChange}
+      ref={phoneInput}
+      textContainerStyle={styles.textContainer}
       textInputProps={{
+        maxLength: getMaxLength(),
         placeholder,
-        maxLength: 9,
         placeholderTextColor: defaultStyles.colors.medium,
       }}
-      onChangeCountry={handleChangeCode}
-      onChangeText={setValue}
-      autoFocus
+      textInputStyle={defaultStyles.text}
     />
   );
 };
