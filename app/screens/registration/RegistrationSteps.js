@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import * as Yup from "yup";
 import YupPassword from "yup-password";
 
+import PersonalDetails from "./PersonalDetails";
 import { Step, Steps } from "../../components/stepper";
 
 YupPassword(Yup);
@@ -10,11 +11,7 @@ YupPassword(Yup);
 const RegistrationSteps = () => {
   return (
     <Steps numOfSteps={4}>
-      <Step>
-        <View style={{ alignItems: "center" }}>
-          <Text>Step 1</Text>
-        </View>
-      </Step>
+      <PersonalDetails />
       <Step>
         <View style={{ alignItems: "center" }}>
           <Text>Step 2</Text>
