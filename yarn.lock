@@ -7375,6 +7375,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"libphonenumber-js@npm:^1.10.18":
+  version: 1.10.59
+  resolution: "libphonenumber-js@npm:1.10.59"
+  checksum: 10c0/68a2a13caedf304f3644ffd97faa308d74ae79d181b164d1a43d8f6c63643aa8e13117a3e2e53ea0dcaa16378121d2b6331d1b0353263d3ea7ca22f2bf3d1460
+  languageName: node
+  linkType: hard
+
 "lighthouse-logger@npm:^1.0.0":
   version: 1.4.2
   resolution: "lighthouse-logger@npm:1.4.2"
@@ -8260,6 +8267,7 @@ __metadata:
     react-native-toast-notifications: "npm:^3.4.0"
     yup: "npm:^1.3.3"
     yup-password: "npm:^0.3.0"
+    yup-phone-lite: "npm:^2.0.1"
   languageName: unknown
   linkType: soft
 
@@ -11564,6 +11572,17 @@ __metadata:
   version: 0.3.0
   resolution: "yup-password@npm:0.3.0"
   checksum: 10c0/a43b52d6442fd6b5ddc080bcf921c15db98a1350421caddb62e2ca8fe72a0aad96fed726daf745189eed82e796c8b34e30f237e25b8e831b86bc7688ba6f7ab8
+  languageName: node
+  linkType: hard
+
+"yup-phone-lite@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "yup-phone-lite@npm:2.0.1"
+  dependencies:
+    libphonenumber-js: "npm:^1.10.18"
+  peerDependencies:
+    yup: ">0.32.0"
+  checksum: 10c0/c3f4229cce0b7631a6836dfe2f2b37ad640badf5be5aeae2a1efc54f662ccc6489eddf50a1d44e35fae0658164010884a8dd379665f9e0d84b233a3d94dfde62
   languageName: node
   linkType: hard
 
