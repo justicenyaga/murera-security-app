@@ -28,7 +28,6 @@ const PhoneInput = ({
 
   return (
     <RNPhoneNumberInput
-      autoFocus
       codeTextStyle={defaultStyles.text}
       containerStyle={[styles.container, { width }]}
       defaultCode={defaultCode}
