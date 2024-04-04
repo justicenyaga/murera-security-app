@@ -7,7 +7,7 @@ import ActivationScreen from "../screens/ActivationScreen";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import LoginScreen from "../screens/LoginScreen";
 import OtpVerificationScreen from "../screens/OtpVerificationScreen";
-import RegisterScreen from "../screens/RegisterScreen";
+import RegistrationSteps from "../screens/registration/RegistrationSteps";
 import ResetPasswordScreen from "../screens/ResetPasswordScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
 
@@ -42,7 +42,7 @@ const AuthNavigator = () => (
     />
     <Stack.Screen
       name={routes.REGISTER}
-      component={RegisterScreen}
+      component={RegistrationSteps}
       options={{ title: "Sign Up" }}
     />
     <Stack.Screen
