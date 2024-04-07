@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, ScrollView, Image } from "react-native";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useToast } from "react-native-toast-notifications";
 import * as Yup from "yup";
 
@@ -12,6 +12,7 @@ import { Form, FormField, SubmitButton } from "../components/forms";
 import authApi from "../api/auth";
 import defaultStyles from "../config/styles";
 import passwordResetApi from "../api/passwordReset";
+import routes from "../navigation/routes";
 import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
 
@@ -32,6 +33,7 @@ const validationSchema = Yup.object().shape({
 
 const ResetPasswordScreen = () => {
   const toast = useToast();
+  const navigation = useNavigation();
   const { params } = useRoute();
   const { logIn } = useAuth();
   const loginApi = useApi(authApi.login);
@@ -39,13 +41,20 @@ const ResetPasswordScreen = () => {
 
   const handleSubmit = async ({ password }) => {
     const email = params.email;
-    const { ok, data } = await resetPasswordApi.request(email, password);
+    const { ok, data, status } = await resetPasswordApi.request(
+      email,
+      password,
+    );
 
     if (!ok) return toast.show(data, { type: "error" });
+
+    toast.show("Password reset successfully", { type: "success" });
 
     const { headers } = await loginApi.request(email, password);
     const authToken = headers["x-auth-token"];
     logIn(authToken);
+
+    status === 201 && navigation.navigate(routes.ACTIVATION);
   };
 
   return (
