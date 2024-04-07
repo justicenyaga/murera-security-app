@@ -11,14 +11,14 @@ import Text from "../components/Text";
 
 import colors from "../config/colors";
 import defaultStyles from "../config/styles";
+import passwordResetApi from "../api/passwordReset";
 import routes from "../navigation/routes";
-import usersApi from "../api/users";
 import useApi from "../hooks/useApi";
 
 const OtpVerificationScreen = () => {
   const toast = useToast();
   const navigation = useNavigation();
-  const verifyPasswordResetOtpApi = useApi(usersApi.verifyPasswordResetOtp);
+  const verifyOtpApi = useApi(passwordResetApi.verifyOtp);
 
   const [otp, setOtp] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -28,7 +28,7 @@ const OtpVerificationScreen = () => {
   }, [otp]);
 
   const handleSubmit = async () => {
-    const { ok, data } = await verifyPasswordResetOtpApi.request(otp);
+    const { ok, data } = await verifyOtpApi.request(otp);
     if (ok) {
       navigation.navigate(routes.RESET_PASSWORD, { email: data.email });
     } else toast.show(data, { type: "error" });
@@ -36,7 +36,7 @@ const OtpVerificationScreen = () => {
 
   return (
     <>
-      <ActivityIndicator visible={verifyPasswordResetOtpApi.loading} />
+      <ActivityIndicator visible={verifyOtpApi.loading} />
       <Screen style={styles.screen}>
         <ScrollView>
           <Image

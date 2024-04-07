@@ -11,7 +11,7 @@ import { Form, FormField, SubmitButton } from "../components/forms";
 
 import authApi from "../api/auth";
 import defaultStyles from "../config/styles";
-import usersApi from "../api/users";
+import passwordResetApi from "../api/passwordReset";
 import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
 
@@ -35,7 +35,7 @@ const ResetPasswordScreen = () => {
   const { params } = useRoute();
   const { logIn } = useAuth();
   const loginApi = useApi(authApi.login);
-  const resetPasswordApi = useApi(usersApi.resetPassword);
+  const resetPasswordApi = useApi(passwordResetApi.resetPassword);
 
   const handleSubmit = async ({ password }) => {
     const email = params.email;

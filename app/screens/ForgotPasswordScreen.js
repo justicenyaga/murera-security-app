@@ -13,7 +13,7 @@ import { Form, FormField, SubmitButton } from "../components/forms";
 import defaultStyles from "../config/styles";
 import emailOrNationalIDTest from "../utils/emailOrNationalIDTest";
 import routes from "../navigation/routes";
-import usersApi from "../api/users";
+import passwordResetApi from "../api/passwordReset";
 import useApi from "../hooks/useApi";
 
 const validationSchema = Yup.object().shape({
@@ -25,17 +25,17 @@ const validationSchema = Yup.object().shape({
 const ForgotPasswordScreen = () => {
   const toast = useToast();
   const navigation = useNavigation();
-  const passwordResetRequestApi = useApi(usersApi.passwordResetRequest);
+  const requestResetApi = useApi(passwordResetApi.requestReset);
 
   const handleSubmit = async ({ identifier }) => {
-    const { ok, data } = await passwordResetRequestApi.request(identifier);
+    const { ok, data } = await requestResetApi.request(identifier);
     if (ok) navigation.navigate(routes.OTP_VERIFICATION);
     else toast.show(data, { type: "error" });
   };
 
   return (
     <>
-      <ActivityIndicator visible={passwordResetRequestApi.loading} />
+      <ActivityIndicator visible={requestResetApi.loading} />
       <Screen style={styles.screen}>
         <Form
           initialValues={{ identifier: "" }}
