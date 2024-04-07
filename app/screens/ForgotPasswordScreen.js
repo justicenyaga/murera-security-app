@@ -29,7 +29,7 @@ const ForgotPasswordScreen = () => {
 
   const handleSubmit = async ({ identifier }) => {
     const { ok, data } = await requestResetApi.request(identifier);
-    if (ok) navigation.navigate(routes.OTP_VERIFICATION);
+    if (ok) navigation.navigate(routes.OTP_VERIFICATION, { email: data.email });
     else toast.show(data, { type: "error" });
   };
 
