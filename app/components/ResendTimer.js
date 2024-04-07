@@ -29,6 +29,7 @@ const ResendTimer = ({ timeLeft, onPress }) => {
 const styles = StyleSheet.create({
   text: {
     color: "#777",
+    alignSelf: "center",
   },
   textLink: {
     color: "#777",
