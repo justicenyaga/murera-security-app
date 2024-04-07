@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
 import { useToast } from "react-native-toast-notifications";
 
@@ -12,32 +12,14 @@ import authApi from "../api/auth";
 import usersApi from "../api/users";
 import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
-
-const resendTimerDuration = 30; // seconds
+import useTimer from "../hooks/useTimer";
 
 const ActivationScreen = () => {
   const toast = useToast();
   const resendVerificationApi = useApi(usersApi.resendVerification);
   const refreshAuthTokenApi = useApi(authApi.refreshAuthToken);
   const { user, logIn } = useAuth();
-
-  const [timeLeft, setTimeLeft] = useState();
-
-  let resendTimerInterval;
-
-  const calculateTimeLeft = (finalTime) => {
-    const difference = finalTime - +new Date();
-    if (difference >= 0) setTimeLeft(Math.round(difference / 1000));
-    else {
-      setTimeLeft(0);
-      clearInterval(resendTimerInterval);
-    }
-  };
-
-  const triggerTimer = () => {
-    const finalTime = +new Date() + resendTimerDuration * 1000;
-    resendTimerInterval = setInterval(() => calculateTimeLeft(finalTime), 1000);
-  };
+  const { timeLeft, triggerTimer } = useTimer();
 
   const resendVerification = async () => {
     triggerTimer();
