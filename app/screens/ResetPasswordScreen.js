@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, ScrollView, Image } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useToast } from "react-native-toast-notifications";
+import YupPassword from "yup-password";
 import * as Yup from "yup";
 
 import ActivityIndicator from "../components/ActivityIndicator";
@@ -15,6 +16,8 @@ import passwordResetApi from "../api/passwordReset";
 import routes from "../navigation/routes";
 import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
+
+YupPassword(Yup);
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
