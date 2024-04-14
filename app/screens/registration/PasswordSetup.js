@@ -69,7 +69,7 @@ const PasswordSetup = () => {
       cache.remove(cacheKeys.newUser);
 
       const { headers } = await loginApi.request(userInfo.email, password);
-      auth.logIn(headers["x-auth-token"]);
+      await auth.logIn(headers["x-auth-token"]);
 
       navigation.navigate(routes.ACTIVATION);
     } else toast.show(data, { type: "error" });

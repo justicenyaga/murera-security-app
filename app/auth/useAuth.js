@@ -1,16 +1,20 @@
 import { useContext } from "react";
-import { jwtDecode } from "jwt-decode";
+import { useToast } from "react-native-toast-notifications";
 
 import authStorage from "./storage";
 import AuthContext from "./context";
+import usersApi from "../api/users";
 
 export default function () {
+  const toast = useToast();
+
   const { user, setUser } = useContext(AuthContext);
 
-  const logIn = (authToken) => {
-    const user = jwtDecode(authToken);
-    setUser(user);
-    authStorage.storeToken(authToken);
+  const logIn = async (authToken) => {
+    await authStorage.storeToken(authToken);
+    const { ok, data } = await usersApi.getUser();
+    if (ok) setUser(data);
+    else toast.show(data, { type: "error" });
   };
 
   const logOut = () => {

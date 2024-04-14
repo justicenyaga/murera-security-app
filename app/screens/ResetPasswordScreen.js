@@ -55,7 +55,7 @@ const ResetPasswordScreen = () => {
 
     const { headers } = await loginApi.request(email, password);
     const authToken = headers["x-auth-token"];
-    logIn(authToken);
+    await logIn(authToken);
 
     status === 201 && navigation.navigate(routes.ACTIVATION);
   };

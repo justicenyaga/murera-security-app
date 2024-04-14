@@ -42,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
     }
 
     const authToken = headers["x-auth-token"];
-    logIn(authToken);
+    await logIn(authToken);
 
     if (!data.isActive) navigation.navigate(routes.ACTIVATION);
   };

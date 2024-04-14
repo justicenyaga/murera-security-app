@@ -35,7 +35,7 @@ const ActivationScreen = () => {
 
     const authToken = headers["x-auth-token"];
 
-    if (data.isActive) logIn(authToken);
+    if (data.isActive) await logIn(authToken);
     else toast.show("Email not verified", { type: "error" });
   };
 

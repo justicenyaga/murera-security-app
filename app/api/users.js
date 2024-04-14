@@ -2,6 +2,8 @@ import client from "./client";
 
 const endpoint = "/users";
 
+const getUser = () => client.get(endpoint + "/me");
+
 const register = (userInfo) => client.post(endpoint, userInfo);
 
 const checkEmail = (email) => client.post(endpoint + "/check-email", { email });
@@ -15,6 +17,7 @@ const resendVerification = (email) =>
 export default {
   checkEmail,
   checkNationalId,
+  getUser,
   register,
   resendVerification,
 };

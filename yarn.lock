@@ -4352,13 +4352,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.36.0":
-  version: 3.36.0
-  resolution: "core-js@npm:3.36.0"
-  checksum: 10c0/62dcb41ba79ead581e4c5b2740ae18bfe6ee230e853893736d16edb01b580574d8645ff6c5513d1c75d59620f8451aee45c119d3c4f5ebc66cff5f003a816864
-  languageName: node
-  linkType: hard
-
 "core-util-is@npm:~1.0.0":
   version: 1.0.3
   resolution: "core-util-is@npm:1.0.3"
@@ -7328,13 +7321,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jwt-decode@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "jwt-decode@npm:4.0.0"
-  checksum: 10c0/de75bbf89220746c388cf6a7b71e56080437b77d2edb29bae1c2155048b02c6b8c59a3e5e8d6ccdfd54f0b8bda25226e491a4f1b55ac5f8da04cfbadec4e546c
-  languageName: node
-  linkType: hard
-
 "keyv@npm:^4.5.3":
   version: 4.5.4
   resolution: "keyv@npm:4.5.4"
@@ -8236,7 +8222,6 @@ __metadata:
     "@react-navigation/native": "npm:^6.1.14"
     "@react-navigation/stack": "npm:^6.3.25"
     apisauce: "npm:^3.0.1"
-    core-js: "npm:^3.36.0"
     dayjs: "npm:^1.11.10"
     eslint: "npm:^8.0.1"
     eslint-config-standard: "npm:^17.1.0"
@@ -8251,7 +8236,6 @@ __metadata:
     expo-status-bar: "npm:~1.11.1"
     expo-updates: "npm:~0.24.11"
     formik: "npm:^2.4.5"
-    jwt-decode: "npm:^4.0.0"
     lodash: "npm:^4.17.21"
     lottie-react-native: "npm:6.5.1"
     prop-types: "npm:^15.8.1"
