@@ -42,6 +42,10 @@ const PersonalDetails = () => {
   const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(true);
 
+  // 18 years ago
+  const maxDate = new Date();
+  maxDate.setFullYear(maxDate.getFullYear() - 18);
+
   const getCachedUserData = async () => {
     const cachedData = await cache.get(cacheKeys.newUser);
     setUserData(cachedData);
@@ -119,7 +123,7 @@ const PersonalDetails = () => {
                 icon="calendar-month"
                 name="dob"
                 placeholder="Date of Birth"
-                maximumDate={new Date(2006, 0, 1)}
+                maximumDate={maxDate}
               />
 
               <TextLink
