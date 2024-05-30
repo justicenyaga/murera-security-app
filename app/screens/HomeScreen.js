@@ -1,19 +1,27 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-const HomeScreen = (props) => {
+import Screen from "../components/Screen";
+import UserCard from "../components/UserCard";
+
+const HomeScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-    </View>
+    <Screen style={styles.screen}>
+      <View style={styles.container}>
+        <UserCard />
+      </View>
+    </Screen>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    padding: 15,
+  },
+  container: {
+    paddingTop: 20,
+    width: "100%",
   },
 });
 
