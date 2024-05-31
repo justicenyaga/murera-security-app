@@ -4,15 +4,23 @@ import PropTypes from "prop-types";
 
 import Button from "../Button";
 
-const SubmitButton = ({ title, disabled }) => {
+const SubmitButton = ({ title, icon, disabled }) => {
   const { handleSubmit } = useFormikContext();
 
-  return <Button title={title} onPress={handleSubmit} disabled={disabled} />;
+  return (
+    <Button
+      title={title}
+      onPress={handleSubmit}
+      disabled={disabled}
+      icon={icon}
+    />
+  );
 };
 
 SubmitButton.propTypes = {
-  title: PropTypes.string,
   disabled: PropTypes.bool,
+  icon: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default SubmitButton;
