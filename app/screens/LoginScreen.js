@@ -85,7 +85,7 @@ const LoginScreen = ({ navigation }) => {
             />
           </ScrollView>
 
-          <SubmitButton title="Sign In" />
+          <SubmitButton title="Sign In" icon="login" />
 
           <TextLink
             onPress={() => navigation.navigate(routes.REGISTER)}

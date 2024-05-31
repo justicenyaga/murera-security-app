@@ -34,10 +34,12 @@ const WelcomeScreen = ({ navigation }) => {
         )}
         <Button
           title="Sign In"
+          icon="login"
           onPress={() => navigation.navigate(routes.LOGIN)}
         />
         <Button
           title="Sign Up"
+          icon="account-plus-outline"
           backgroundColor={colors.secondary}
           onPress={() => navigation.navigate(routes.REGISTER)}
         />

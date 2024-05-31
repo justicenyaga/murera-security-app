@@ -62,7 +62,7 @@ const ForgotPasswordScreen = () => {
             />
           </ScrollView>
 
-          <SubmitButton title="Next" />
+          <SubmitButton title="Send OTP" icon="send" />
 
           <TextLink
             onPress={() => navigation.navigate(routes.LOGIN)}

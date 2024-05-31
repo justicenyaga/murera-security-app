@@ -102,7 +102,7 @@ const ResetPasswordScreen = () => {
             />
           </ScrollView>
 
-          <SubmitButton title="Reset Password" />
+          <SubmitButton title="Reset Password" icon="lock-reset" />
         </Form>
       </Screen>
     </>

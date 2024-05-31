@@ -76,6 +76,7 @@ const OtpVerificationScreen = () => {
 
         <Button
           title="Verify"
+          icon="check-circle-outline"
           disabled={buttonDisabled}
           onPress={handleSubmit}
         />
