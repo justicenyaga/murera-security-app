@@ -29,7 +29,7 @@ const validationSchema = Yup.object().shape({
 const ContactInfo = () => {
   const toast = useToast();
   const { goNext } = useContext(StepsContext);
-  const checkEmailApi = useApi(usersApi.checkEmail);
+  const checkContactsApi = useApi(usersApi.checkContacts);
 
   const [userData, setUserData] = useState();
   const [loading, setLoading] = useState(true);
@@ -45,7 +45,10 @@ const ContactInfo = () => {
   }, [userData?.firstName]);
 
   const submitHandler = async (contactInfo) => {
-    const { ok, data } = await checkEmailApi.request(contactInfo.email);
+    const phone = `+${contactInfo.phoneCode}${contactInfo.phone}`;
+    const email = contactInfo.email;
+
+    const { ok, data } = await checkContactsApi.request({ phone, email });
     if (!ok) return toast.show(data, { type: "error" });
 
     cache.store(cacheKeys.newUser, { ...userData, ...contactInfo });
@@ -66,7 +69,7 @@ const ContactInfo = () => {
         validationSchema={validationSchema}
       >
         {({ handleSubmit }) => (
-          <Step onNext={handleSubmit} loading={checkEmailApi.loading}>
+          <Step onNext={handleSubmit} loading={checkContactsApi.loading}>
             <ScrollView>
               <Image
                 style={[defaultStyles.form.logo, styles.logo]}

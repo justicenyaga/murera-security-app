@@ -6,7 +6,8 @@ const getUser = () => client.get(endpoint + "/me");
 
 const register = (userInfo) => client.post(endpoint, userInfo);
 
-const checkEmail = (email) => client.post(endpoint + "/check-email", { email });
+const checkContacts = (contacts) =>
+  client.post(endpoint + "/check-contacts", contacts);
 
 const checkNationalId = (nationalId) =>
   client.post(endpoint + "/check-nid", { nationalId });
@@ -15,7 +16,7 @@ const resendVerification = (email) =>
   client.post(endpoint + "/resend-verification", { email });
 
 export default {
-  checkEmail,
+  checkContacts,
   checkNationalId,
   getUser,
   register,
