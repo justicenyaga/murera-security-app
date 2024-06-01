@@ -30,7 +30,7 @@ const UserCard = () => {
 const styles = StyleSheet.create({
   card: {
     alignItems: "center",
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
     borderRadius: 15,
     flexDirection: "row",
     overflow: "hidden",
@@ -57,10 +57,10 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   idValue: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.light,
     borderBottomRightRadius: 15,
     borderTopRightRadius: 15,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "bold",
     paddingHorizontal: 10,
     paddingVertical: 5,
