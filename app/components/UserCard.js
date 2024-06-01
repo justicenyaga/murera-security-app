@@ -1,16 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Image } from "react-native";
+import PropTypes from "prop-types";
+
 import Text from "./Text";
 
 import colors from "../config/colors";
 import useAuth from "../auth/useAuth";
+import ImageInput from "./ImageInput";
 
-const UserCard = () => {
+const UserCard = ({ isEdit }) => {
   const { user } = useAuth();
+
+  const [imageUrl, setImageUrl] = useState("");
+
+  useEffect(() => {
+    setImageUrl(user.image);
+  }, []);
 
   return (
     <View style={styles.card}>
-      <Image style={styles.image} source={{ uri: user.image }} />
+      <View>
+        {isEdit ? (
+          <ImageInput
+            disabledDelete
+            imageUrl={imageUrl}
+            onChangeImage={setImageUrl}
+            style={styles.imageInput}
+          />
+        ) : (
+          <Image style={styles.image} source={{ uri: user.image }} />
+        )}
+      </View>
+
       <View style={styles.detailsContainer}>
         <Text style={styles.name} numberOfLines={1}>
           {user.firstName} {user.lastName}
@@ -67,7 +88,11 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
   image: {
-    borderRadius: 40,
+    borderRadius: 15,
+    width: 80,
+    height: 80,
+  },
+  imageInput: {
     width: 80,
     height: 80,
   },
@@ -77,5 +102,9 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
   },
 });
+
+UserCard.propTypes = {
+  isEdit: PropTypes.bool,
+};
 
 export default UserCard;
