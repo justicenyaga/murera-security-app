@@ -60,9 +60,10 @@ const PasswordSetup = () => {
   }, [userData?.firstName]);
 
   const submitHandler = async ({ password }) => {
-    const userInfo = _.omit(userData, ["phoneCode"]);
+    const userInfo = _.omit(userData, ["phoneCode", "imageUrl"]);
     userInfo.phone = `+${userData.phoneCode}${userData.phone}`;
     userInfo.password = password;
+    userInfo.image = userData.imageUrl;
 
     const { ok, data } = await registerApi.request(userInfo);
     if (ok) {

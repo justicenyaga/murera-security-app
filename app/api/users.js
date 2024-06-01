@@ -4,7 +4,26 @@ const endpoint = "/users";
 
 const getUser = () => client.get(endpoint + "/me");
 
-const register = (userInfo) => client.post(endpoint, userInfo);
+const register = (userInfo) => {
+  const data = new FormData();
+
+  data.append("firstName", userInfo.firstName);
+  data.append("lastName", userInfo.lastName);
+  data.append("email", userInfo.email);
+  data.append("nationalId", userInfo.nationalId);
+  data.append("dob", userInfo.dob);
+  data.append("phone", userInfo.phone);
+  data.append("password", userInfo.password);
+  data.append("image", {
+    name: "image.jpg",
+    type: "image/jpeg",
+    uri: userInfo.image,
+  });
+
+  return client.post(endpoint, data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
 
 const checkContacts = (contacts) =>
   client.post(endpoint + "/check-contacts", contacts);
