@@ -51,12 +51,19 @@ const UserCard = ({ isEdit }) => {
           {user.firstName} {user.lastName}
         </Text>
 
-        <View style={styles.idRow}>
-          <Text style={styles.idTitle}>ID number </Text>
-          <Text style={styles.idValue} numberOfLines={1}>
-            {user.nationalId}
-          </Text>
-        </View>
+        {isEdit ? (
+          <>
+            <Text>{user.email}</Text>
+            <Text>{user.phone}</Text>
+          </>
+        ) : (
+          <View style={styles.idRow}>
+            <Text style={styles.idTitle}>ID number </Text>
+            <Text style={styles.idValue} numberOfLines={1}>
+              {user.nationalId}
+            </Text>
+          </View>
+        )}
       </View>
     </View>
   );
