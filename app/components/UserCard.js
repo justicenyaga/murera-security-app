@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Image } from "react-native";
+import { useToast } from "react-native-toast-notifications";
 import PropTypes from "prop-types";
 
+import ImageInput from "./ImageInput";
 import Text from "./Text";
 
 import colors from "../config/colors";
+import usersApi from "../api/users";
+import useApi from "../hooks/useApi";
 import useAuth from "../auth/useAuth";
-import ImageInput from "./ImageInput";
 
 const UserCard = ({ isEdit }) => {
+  const toast = useToast();
   const { user } = useAuth();
+  const changeImageApi = useApi(usersApi.changeImage);
 
   const [imageUrl, setImageUrl] = useState("");
+
+  const handleImageChange = async (uri) => {
+    const { data, ok } = await changeImageApi.request(uri);
+    if (!ok) return toast.show(data, { type: "error" });
+    setImageUrl(uri);
+  };
 
   useEffect(() => {
     setImageUrl(user.image);
@@ -24,7 +35,8 @@ const UserCard = ({ isEdit }) => {
           <ImageInput
             disabledDelete
             imageUrl={imageUrl}
-            onChangeImage={setImageUrl}
+            loading={changeImageApi.loading}
+            onChangeImage={handleImageChange}
             style={styles.imageInput}
           />
         ) : (
