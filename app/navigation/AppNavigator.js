@@ -2,8 +2,12 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+import NewCaseIcon from "./NewCaseIcon";
+import routes from "./routes";
+
 import AccountScreen from "../screens/AccountScreen";
 import HomeScreen from "../screens/HomeScreen";
+import NewCaseScreen from "../screens/NewCaseScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -17,13 +21,23 @@ const AppNavigator = () => {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
-        name="Home"
+        name={routes.HOME}
         component={HomeScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
+      />
+      <Tab.Screen
+        name={routes.NEW_CASE}
+        component={NewCaseScreen}
+        options={() => ({
+          title: "",
+          tabBarIcon: ({ focused, color }) => (
+            <NewCaseIcon focused={focused} color={color} />
+          ),
+        })}
       />
       <Tab.Screen
         name="Account"
