@@ -34,7 +34,20 @@ const checkNationalId = (nationalId) =>
 const resendVerification = (email) =>
   client.post(endpoint + "/resend-verification", { email });
 
+const changeImage = (image) => {
+  const data = new FormData();
+  data.append("image", {
+    name: "image.jpg",
+    type: "image/jpeg",
+    uri: image,
+  });
+  return client.put(endpoint + "/change-image", data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
+
 export default {
+  changeImage,
   checkContacts,
   checkNationalId,
   getUser,
