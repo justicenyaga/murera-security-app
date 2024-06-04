@@ -17,10 +17,16 @@ export default function () {
     else toast.show(data, { type: "error" });
   };
 
+  const refreshUser = async () => {
+    const { ok, data } = await usersApi.getUser();
+    if (ok) setUser(data);
+    else toast.show(data, { type: "error" });
+  };
+
   const logOut = () => {
     setUser(null);
     authStorage.removeToken();
   };
 
-  return { user, logIn, logOut };
+  return { user, logIn, logOut, refreshUser };
 }

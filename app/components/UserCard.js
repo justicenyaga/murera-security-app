@@ -13,15 +13,17 @@ import useAuth from "../auth/useAuth";
 
 const UserCard = ({ isEdit }) => {
   const toast = useToast();
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const changeImageApi = useApi(usersApi.changeImage);
 
   const [imageUrl, setImageUrl] = useState("");
 
   const handleImageChange = async (uri) => {
     const { data, ok } = await changeImageApi.request(uri);
-    if (!ok) return toast.show(data, { type: "error" });
-    setImageUrl(uri);
+    if (ok) {
+      setImageUrl(uri);
+      refreshUser();
+    } else toast.show(data, { type: "error" });
   };
 
   useEffect(() => {
