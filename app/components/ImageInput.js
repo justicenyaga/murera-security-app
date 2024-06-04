@@ -7,12 +7,19 @@ import {
   Alert,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import LottiView from "lottie-react-native";
 import PropTypes from "prop-types";
 import * as ImagePicker from "expo-image-picker";
 
 import colors from "../config/colors";
 
-const ImageInput = ({ disabledDelete, imageUrl, onChangeImage, style }) => {
+const ImageInput = ({
+  disabledDelete,
+  loading,
+  imageUrl,
+  onChangeImage,
+  style,
+}) => {
   useEffect(() => {
     requestPermission();
   }, []);
@@ -44,7 +51,14 @@ const ImageInput = ({ disabledDelete, imageUrl, onChangeImage, style }) => {
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
       <View style={[styles.container, style]}>
-        {imageUrl ? (
+        {loading ? (
+          <LottiView
+            autoPlay
+            loop
+            source={require("../assets/animations/loader.json")}
+            style={styles.loader}
+          />
+        ) : imageUrl ? (
           <Image source={{ uri: imageUrl }} style={styles.image} />
         ) : (
           <MaterialCommunityIcons
@@ -68,6 +82,10 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     width: 100,
   },
+  loader: {
+    flex: 1,
+    width: "100%",
+  },
   image: {
     height: "100%",
     width: "100%",
@@ -77,6 +95,7 @@ const styles = StyleSheet.create({
 ImageInput.propTypes = {
   disabledDelete: PropTypes.bool,
   imageUrl: PropTypes.string,
+  loading: PropTypes.bool,
   onChangeImage: PropTypes.func.isRequired,
   style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
 };
