@@ -53,8 +53,8 @@ const UserCard = ({ isEdit }) => {
 
         {isEdit ? (
           <>
-            <Text>{user.email}</Text>
-            <Text>{user.phone}</Text>
+            <Text numberOfLines={1}>{user.email}</Text>
+            <Text numberOfLines={1}>{user.phone}</Text>
           </>
         ) : (
           <View style={styles.idRow}>
