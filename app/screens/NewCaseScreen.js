@@ -13,6 +13,7 @@ import casesApi from "../api/cases";
 import countiesApi from "../api/counties";
 import stationsApi from "../api/stations";
 import useApi from "../hooks/useApi";
+import useCases from "../hooks/useCases";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(5).label("Title"),
@@ -31,6 +32,7 @@ const validationSchema = Yup.object().shape({
 const NewCaseScreen = () => {
   const toast = useToast();
   const reportingApi = useApi(casesApi.report);
+  const { getCases } = useCases();
 
   const [stations, setStations] = useState([]);
   const [counties, setCounties] = useState([]);
@@ -78,6 +80,7 @@ const NewCaseScreen = () => {
 
     toast.show("Case reported successfully", { type: "success" });
     resetForm();
+    getCases();
   };
 
   return (
