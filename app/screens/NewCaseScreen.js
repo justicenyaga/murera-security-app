@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { useToast } from "react-native-toast-notifications";
-import { useNavigation } from "@react-navigation/native";
 import * as Yup from "yup";
 
 import ActivityIndicator from "../components/ActivityIndicator";
@@ -13,7 +12,6 @@ import { Form, FormField, FormPicker, SubmitButton } from "../components/forms";
 import casesApi from "../api/cases";
 import countiesApi from "../api/counties";
 import stationsApi from "../api/stations";
-import routes from "../navigation/routes";
 import useApi from "../hooks/useApi";
 
 const validationSchema = Yup.object().shape({
@@ -32,7 +30,6 @@ const validationSchema = Yup.object().shape({
 
 const NewCaseScreen = () => {
   const toast = useToast();
-  const navigation = useNavigation();
   const reportingApi = useApi(casesApi.report);
 
   const [stations, setStations] = useState([]);
@@ -41,7 +38,6 @@ const NewCaseScreen = () => {
 
   const handleError = () => {
     toast.show("Internal Server Error", { type: "error" });
-    navigation.navigate(routes.HOME);
   };
 
   const getCounties = async () => {
