@@ -6,6 +6,9 @@ import CaseDetailsScreen from "../screens/CaseDetailsScreen";
 
 import routes from "./routes";
 import CasesScreen from "../screens/CasesScreen";
+import ChangeEmailScreen from "../screens/ChangeEmailScreen";
+import ChangePasswordScreen from "../screens/ChangePasswordScreen";
+import ChangePhoneScreen from "../screens/ChangePhoneScreen";
 
 const Stack = createStackNavigator();
 
@@ -25,6 +28,21 @@ const AccountNavigator = () => (
       name={routes.CASE_DETAILS}
       component={CaseDetailsScreen}
       options={{ title: "" }}
+    />
+    <Stack.Screen
+      name={routes.CHANGE_EMAIL}
+      component={ChangeEmailScreen}
+      options={{ title: "Change Email" }}
+    />
+    <Stack.Screen
+      name={routes.CHANGE_PASSWORD}
+      component={ChangePasswordScreen}
+      options={{ title: "Change Password" }}
+    />
+    <Stack.Screen
+      name={routes.CHANGE_PHONE}
+      component={ChangePhoneScreen}
+      options={{ title: "Change Phone Number" }}
     />
   </Stack.Navigator>
 );
