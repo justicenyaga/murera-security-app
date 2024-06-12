@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 
 Screen.propTypes = {
   children: PropTypes.node,
-  style: PropTypes.object,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   disablePaddingTop: PropTypes.bool,
 };
 
