@@ -61,8 +61,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     borderRadius: 15,
+    elevation: 5,
     marginVertical: 5,
     padding: 10,
+    shadowColor: colors.medium,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   dateTime: {
     fontSize: 14,
