@@ -16,6 +16,9 @@ const CaseCard = ({ caseDetails, onPress }) => {
 
   const dateTime = `${date} ${time}`;
 
+  let status = caseDetails.status;
+  if (status === "InProgress") status = "In Progress";
+
   return (
     <TouchableWithoutFeedback onPress={onPress}>
       <View style={styles.container}>
@@ -33,7 +36,7 @@ const CaseCard = ({ caseDetails, onPress }) => {
         <View style={styles.row}>
           <Text style={styles.dateTime}>{dateTime}</Text>
           <Text style={[styles.status, statusStyle(caseDetails.status)]}>
-            {caseDetails.status}
+            {status}
           </Text>
         </View>
       </View>
