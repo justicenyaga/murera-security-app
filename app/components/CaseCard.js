@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import Text from "./Text";
 
 import colors from "../config/colors";
+import statusStyle from "../utils/statusStyle";
 
 const CaseCard = ({ caseDetails, onPress }) => {
   const date = new Date(caseDetails.createdAt).toLocaleDateString("en-GB");
@@ -14,17 +15,6 @@ const CaseCard = ({ caseDetails, onPress }) => {
   });
 
   const dateTime = `${date} ${time}`;
-
-  const statusStyles = { backgroundColor: "#9e9e9e", color: colors.white };
-  switch (caseDetails.status) {
-    case "Pending":
-      statusStyles.backgroundColor = "#ffeb3b";
-      statusStyles.color = colors.medium;
-      break;
-    case "InProgress":
-      statusStyles.backgroundColor = "#4caf50";
-      break;
-  }
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>
@@ -42,7 +32,7 @@ const CaseCard = ({ caseDetails, onPress }) => {
         </Text>
         <View style={styles.row}>
           <Text style={styles.dateTime}>{dateTime}</Text>
-          <Text style={[styles.status, statusStyles]}>
+          <Text style={[styles.status, statusStyle(caseDetails.status)]}>
             {caseDetails.status}
           </Text>
         </View>
