@@ -2624,6 +2624,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-segmented-control/segmented-control@npm:2.4.1":
+  version: 2.4.1
+  resolution: "@react-native-segmented-control/segmented-control@npm:2.4.1"
+  peerDependencies:
+    react: ">=16.0"
+    react-native: ">=0.62"
+  checksum: 10c0/4393445c3cab753df28ee72d3fa504fd10fc645ca9b91e2cfef2a084da7e67147294f3bb5701af025e4a68b2ec6a13ba0e933e17299b3c12c7d87e4d67d7e2f7
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.73.1, @react-native/assets-registry@npm:~0.73.1":
   version: 0.73.1
   resolution: "@react-native/assets-registry@npm:0.73.1"
@@ -8247,6 +8257,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@react-native-async-storage/async-storage": "npm:1.21.0"
     "@react-native-community/datetimepicker": "npm:7.6.1"
+    "@react-native-segmented-control/segmented-control": "npm:2.4.1"
     "@react-navigation/bottom-tabs": "npm:^6.5.16"
     "@react-navigation/native": "npm:^6.1.14"
     "@react-navigation/stack": "npm:^6.3.25"

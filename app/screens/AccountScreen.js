@@ -49,6 +49,15 @@ const AccountScreen = () => {
         <UserCard isEdit />
       </View>
 
+      <ListItem
+        title="Reported Cases"
+        IconComponent={
+          <Icon name="format-list-bulleted" backgroundColor="#6c5ce7" />
+        }
+        onPress={() => navigation.navigate(routes.CASES)}
+        style={styles.casesBtn}
+      />
+
       <View style={styles.container}>
         <FlatList
           data={menuItems}
@@ -69,15 +78,6 @@ const AccountScreen = () => {
           ItemSeparatorComponent={ListItemSeparator}
         />
       </View>
-
-      <ListItem
-        title="Reported Cases"
-        IconComponent={
-          <Icon name="format-list-bulleted" backgroundColor="#6c5ce7" />
-        }
-        onPress={() => navigation.navigate(routes.REPORTED_CASES)}
-        style={styles.casesBtn}
-      />
 
       <ListItem
         title="Log Out"
