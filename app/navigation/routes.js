@@ -1,5 +1,8 @@
 export default Object.freeze({
+  ACCOUNT: "Account",
   ACTIVATION: "Activation",
+  CASES: "Cases",
+  CASE_DETAILS: "CaseDetails",
   FORGOT_PASSWORD: "ForgotPassword",
   HOME: "Home",
   LOGIN: "Login",
