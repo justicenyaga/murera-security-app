@@ -46,7 +46,10 @@ const changeImage = (image) => {
   });
 };
 
+const changeEmail = (data) => client.put(endpoint + "/change-email", data);
+
 export default {
+  changeEmail,
   changeImage,
   checkContacts,
   checkNationalId,
