@@ -5,12 +5,13 @@ import { useToast } from "react-native-toast-notifications";
 import * as SplashScreen from "expo-splash-screen";
 
 import authStorage from "./app/auth/storage";
-
 import navigationTheme from "./app/navigation/navigationTheme";
 import usersApi from "./app/api/users";
+
 import AuthContext from "./app/auth/context";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import AppNavigator from "./app/navigation/AppNavigator";
+import OfflineNotice from "./app/components/OfflineNotice";
 import ToastProvider from "./app/components/ToastProvider";
 
 // Keep the splash screen visible while we fetch the resources
@@ -50,6 +51,7 @@ const App = () => {
     <GestureHandlerRootView style={{ flex: 1 }} onLayout={onLayoutRootView}>
       <ToastProvider>
         <AuthContext.Provider value={{ user, setUser }}>
+          <OfflineNotice />
           <NavigationContainer theme={navigationTheme}>
             {user?.isActive ? <AppNavigator /> : <AuthNavigator />}
           </NavigationContainer>
