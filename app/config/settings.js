@@ -8,7 +8,7 @@ const settings = {
     apiUrl: "http://example.com/api",
   },
   prod: {
-    apiUrl: "http://example.com/api",
+    apiUrl: "https://murera-security-api-55294b1c68ce.herokuapp.com/api",
   },
 };
 
